@@ -1,0 +1,1328 @@
+new wifi password - Wbma@har$22es45k
+lap
+username - administrator
+
+password - water@123$
+-----------------------------------------------------------------
+staging
+
+974650944
+
+Protocol@123!
+
+------------------------------------------------------------------
+mail outlook
+
+Rajesh.Arunachalam@waterlabs.ai / Dof10896
+
+------------
+Teams
+
+Rajesh.Arunachalam@waterlabs.ai / Dof10896
+
+---------------
+Forticlinent
+
+RajeshWL0251 / Wl@12345678
+
+rajesha	/ Nars#cha#8754
+
+--------------
+github
+
+Rajesh.Arunachalam@waterlabs.ai  /  water@321$
+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
+
+----
+oracle credentials
+
+username - rajesh7799053986@gmail.com
+
+password - Rajesh@143311
+
+---------------------------------------------------------
+
+jenkins - 10.1.210.27
+
+url- http://10.1.210.27:8085/
+user name - admin
+password - 83b576162e4d4b439ee2cc4796f49b44
+
+---------------------------------------------------------
+
+aws env detials
+ 
+url - https://us-east-2.console.aws.amazon.com/console/home
+ 
+id - 327143103308
+ 
+user name - Sravank
+ 
+password - Protocol@123!
+
+------------------------------------------------------
+install chrome 
+
+sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+sudo apt install ./google-chrome-stable_current_amd64.deb
+--------------------------------------------------------------------------
+install microsoft outlook
+
+sudo apt update
+sudo apt install snapd
+sudo snap install prospect-mail
+
+------------------------------------------------------------------------
+install forti client
+
+wget -c 'https://filestore.fortinet.com/forticlient/downloads/FortiClientFullVPNInstaller_6.4.0.0851.deb' 
+
+sudo dpkg -i FortiClientFullVPNInstaller_6.4.0.0851.deb
+
+----------------------------------------------------------------------------
+install eclipse
+
+sudo apt install default-jre
+
+sudo snap install --classic eclipse
+
+-----------------------------------------------------------------------------
+git 
+
+sudo apt install git
+
+git --version
+
+
+git config --global user.name "Your Name"
+git config --global user.email "youremail@domain.com"
+
+
+nano ~/.gitconfig
+
+
+-------------------------------------------------------------------------------
+maven installation
+
+sudo apt install maven
+
+mvn -version
+
+sudo apt install default-jdk
+
+java -version
+
+sudo nano /etc/profile.d/maven.sh
+export JAVA_HOME=/usr/lib/jvm/default-java
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+
+
+sudo chmod +x /etc/profile.d/maven.sh
+
+source /etc/profile.d/maven.sh
+mvn -version
+
+--------------------------------------------------------------------------
+java path
+
+sudo update-alternatives --config java
+
+-----------------------------------------------------------
+
+jenkins 
+
+https://linuxhint.com/install_jenkins_docker_ubuntu/
+
+FROM jenkins/jenkins
+LABEL maintainer="hitjethva@gmail.com"
+USER root
+RUN mkdir /var/log/jenkins
+RUN mkdir /var/cache/jenkins
+RUN chown -R jenkins:jenkins /var/log/jenkins
+RUN chown -R jenkins:jenkins /var/cache/jenkins
+USER jenkins
+ 
+ENV JAVA_OPTS="-Xmx8192m"
+ENV JENKINS_OPTS="--handlerCountMax=300 --logfile=/var/log/jenkins/jenkins.log
+--webroot=/var/cache/jenkins/war"
+
+docker build -t myjenkins .
+
+docker run -p 8080:8080 -p 50000:50000 --name=jenkins-master --volume /opt/services/jenkins_home/=/var/log/jenkins --volume /opt/services/jenkins_home/:/var/jenkins_home -d myjenkins
+
+docker exec jenkins-master tail -f /var/log/jenkins/jenkins.log
+
+admin /  admin
+
+rajesh7799053986@gmail.com
+
+sudo docker run -p 8085:8080 --name=jenkins-master-1 --volume /opt/services/ssh/:/var/lib/jenkins/.ssh/ --volume /opt/services/jenkins_home/:/var/jenkins_home jenkins-master
+
+
+---------------------------------------------------------------------
+
+Sonarqube Server:
+
+            Sever endpoint  - http://10.1.210.33/sessions/new
+
+Sonarqube username - wluser
+
+Password – Protocol@123!
+
+Project Name - Waterlabs BOT Automation
+
+
+---------------------------------------------------------------------
+
+local sonarqube
+
+sudo apt-get update
+sudo apt-get -y upgrade
+
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+
+wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
+
+
+sudo apt-get -y install postgresql postgresql-contrib
+
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+
+sudo passwd postgres
+
+su - postgres
+
+createuser sonar
+
+psql
+
+ALTER USER sonar WITH ENCRYPTED password 'S@nar';
+
+CREATE DATABASE sonar OWNER sonar;
+
+\q
+
+Exit
+
+user name - sonar
+
+password - water@123$
+
+
+
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.3.zip
+
+apt-get -y install unzip
+
+sudo unzip sonarqube-7.3.zip -d /opt
+
+sudo mv /opt/sonarqube-7.3 /opt/sonarqube
+
+sudo chown -R administrator:administrator /opt/sonarqube/
+
+sudo nano /opt/sonarqube/conf/sonar.properties
+
+-->Uncomment and provide the PostgreSQL username and password of the database
+
+#sonar.jdbc.username=
+#sonar.jdbc.password=
+
+add postgress username and password
+sonar.jdbc.username=sonar
+sonar.jdbc.password=P@ssword
+
+#sonar.jdbc.url=jdbc:postgresql://localhost/sonar
+
+sudo nano /etc/systemd/system/sonar.service
+
+[Unit]
+Description=SonarQube service
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
+ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
+
+User=root
+Group=root
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl start sonar
+
+sudo systemctl enable sonar
+
+sudo systemctl status sonar
+
+sudo chown -R $USER:$USER /var/www/example.com/html
+
+
+https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04
+
+
+https://developerinsider.co/install-sonarqube-on-ubuntu/
+
+
+sonar.web.javaOpts=-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError
+
+----------------------------------------------------------------------------------
+
+suppressing Errors
+
+https://strivant.dincloud.com/vpn/index.html
+
+Username  -  drajaram
+
+Password - Tharworx@456
+
+public static void getsupp() throws InterruptedException
+    {
+        Keyboard keyboard =new DesktopKeyboard();
+        ImagePath.setBundlePath(BASE_DIR +"//input-images");
+        Screen s=new Screen();
+        System.setProperty("webdriver.chrome.driver", BASE_DIR + "/chromedriver");
+        WebDriver driver=new ChromeDriver();
+        driver.get("https://docs.oracle.com/javase/tutorial/2d/images/saveimage.html");
+        Pattern pa1=new Pattern("/home/administrator/eclipse-workspace/Suppressing/input-images/fi.png");
+        Pattern pa2=new Pattern("/home/administrator/eclipse-workspace/Suppressing/input-images/f2i.png");
+        Pattern pa3=new Pattern("/home/administrator/eclipse-workspace/Suppressing/input-images/f3i.png");
+        Pattern pa4=new Pattern("/home/administrator/eclipse-workspace/Suppressing/input-images/f4i.png");
+        Finder f1=new Finder(s.capture().getImage());
+        Finder f2=new Finder(s.capture().getImage());
+        Finder f3=new Finder(s.capture().getImage());
+        Finder f4=new Finder(s.capture().getImage());
+        f1.find(pa1);
+        f2.find(pa2);
+        f3.find(pa3);
+        f4.find(pa4);
+        if(f1.hasNext())
+        {
+            Match m=f1.next();
+            System.out.println("Match found with f1 "+(m.getScore()*100)+"%");
+           
+        }
+        else if(f2.hasNext())
+        {
+            Match m=f2.next();
+            System.out.println("Match found with f2 "+(m.getScore()*100)+"%");
+           
+        }
+        else if(f3.hasNext())
+        {
+            Match m=f3.next();
+            System.out.println("Match found with f3 "+(m.getScore()*100)+"%");
+           
+        }
+        else if(f4.hasNext())
+        {
+            Match m=f4.next();
+            System.out.println("Match found with f4 "+(m.getScore()*100)+"%");
+           
+        }
+        else
+        {
+            System.out.println("No Match Found");
+        }
+          
+      }
+
+
+
+
+sudo update-alternatives --install /usr/bin/java java /opt/java8/jdk1.8.0_271/bin/java 100
+
+jdk1.8.0_301
+
+
+dpkg -l | grep jdk1.8.0_301
+
+
+sudo apt purge jdk1.8.0_301*
+
+
+sudo apt remove --autoremove jdk1.8.0_301*
+
+
+export JAVA_HOME=/opt/jdk/jdk1.8.0_301/bin/java
+
+
+/usr/lib/jvm/java-8-openjdk-amd64
+
+
+
+https://github.com/Waterlabsadmin/LasitbotXifinEvAvaility.git
+
+
+https://github.com/jk6721189/XifinAvaility.git
+
+
+/home/vm01/sonar-test
+
+
+10.1.210.33
+
+vm01
+
+
+scp /Frontend-sonar/WaterlabsFrontend/sonar-project.properties vm01@10.1.240.23:/home/vm01
+
+scp source_file_name username@destination_host:destination_folder
+
+
+scp Nars#cha#8754 vm01@10.1.210.27:/home/vm01
+
+sudo update-alternatives --install /usr/bin/java java /opt/java8/jdk1.8.0_271/bin/java 100
+
+
+/usr/share/maven
+
+
+sudo update-alternatives --config libopencv3.2-java
+
+-------------------------------------------------------------------------------------
+opencv
+
+sudo apt update
+sudo apt-get install libtesseract3 tesseract-ocr python-opencv libopencv3.2-java
+
+------------------------------------------------------------------------------------
+chromediver version
+
+https://chromedriver.storage.googleapis.com/index.html?path=92.0.4515.131/
+
+---------------------------------------------
+remove java from ubuntu
+
+step 1 - sudo update-alternatives --display java
+
+
+step 2 - sudo update-alternatives --remove "java" "/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"
+
+after display java command with resutls
+
+replace in step 2 path and execute then check
+
+sudo apt purge -y openjdk-11-jre-headless
+sudo apt purge -y openjdk-8-jre-headless
+sudo apt purge -y default-jdk
+
+
+sudo apt-get install libtesseract3 tesseract-ocr python-opencv libopencv3.2-java
+
+sudo apt-get remove libtesseract3
+
+sudo apt-get remove tesseract-ocr
+
+sudo apt-get remove python-opencv
+
+sudo apt-get remove libopencv3.2-java
+
+sudo apt-get remove libtesseract3 tesseract-ocr python-opencv libopencv3.2-java
+
+
+sudo update-alternatives --display packagename
+
+sudo update-alternatives --remove "java" "/usr/bin/java"
+
+
+sudo apt-get install libtesseract3
+
+sudo apt-get install tesseract-ocr
+
+sudo apt-get install python-opencv
+
+sudo apt-get install libopencv3.2-java
+
+-----------------------------------------------------------------------
+
+sudo apt-get install libtesseract3 tesseract-ocr python-opencv libopencv3.2-java
+
+sudo apt-get install libtesseract tesseract-ocr python-opencv libopencv4.2-java
+
+sudo apt install libopencv4.2-java openjdk-11-jre-headless
+cd /usr/lib/jni/
+sudo ln -s libopencv_java420.so libopencv_java.so
+
+sudo update-alternatives --display java
+
+sudo update-alternatives --remove "java" "/usr/lib/jvm/java-11-openjdk-amd64/bin/java"
+
+pkg-config --cflags python-opencv
+
+sudo apt-get remove libtesseract3 tesseract-ocr python-opencv libopencv3.2-java
+
+sudo rm -rf /usr/lib/libopencv*
+
+sudo rm -rf /usr/lib/jni
+
+
+sudo apt-get install openjdk-8-jdk openjdk-8-jre
+
+set env variable .bashrch 
+
+sudo apt-get install libtesseract3 tesseract-ocr python-opencv libopencv3.2-java
+
+
+sudo ln -s /usr/lib/jni/libopencv_java320.so /usr/lib/libopencv_java.so
+
+sudo ln -s /usr/lib/jni/libopencv_java320.so /usr/lib/libopencv_java300.dylib
+
+
+JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/bin/"
+JRE_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre/"
+
+export JAVA_HOME=/opt/java8/jdk1.8.0_271
+export PATH=$PATH:$JAVA_HOME/bin
+
+sudo update-alternatives --install /usr/bin/java java /opt/java8/jdk1.8.0_271/bin/java 100
+------------------------------------------------
+scp command
+
+scp -r username@hostname:/path/from/remote /path/to/local
+
+scp -r /path/from/local username@hostname:/path/to/remote
+
+scp -r /home/administrator/git/EuclidPay/euclid/updatebtn1.png vm01@10.1.210.21:/home/vm01
+
+
+scp -r vm01@10.1.210.21:/home/vm01/java8.tar.gz /home/administrator
+
+----------------------------------------
+recover delete or remove files and folders
+sudo apt-get install extundelete
+
+extundelete /dev/sdb1 --restore-file deletedfile.txt
+
+extundelete /dev/sdb1 --restore-all
+
+
+sudo apt-get install libtesseract-dev
+
+sudo apt-get install tesseract-ocr
+
+sudo apt-get install python-opencv
+
+sudo apt install libopencv-dev
+
+
+
+
+sudo ls -ial /usr/lib/libopencv*
+
+sudo ls -ial /usr/lib/jni/
+
+
+-----------------------------------------------------------------
+git tocken for git
+
+git tocken : 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 
+
+
+git commands
+
+git status
+
+git add helloworld.java
+
+git commit -m "First java program" helloworld.java
+
+git config --get remote.origin.https://github.com/Waterlabsadmin/ECW-Suppressing-Errors.git
+
+https://github.com/Waterlabsadmin/ECW-Suppressing-Errors-.git
+
+https://github.com/Waterlabsadmin/ECW-Suppressing-Errors.git
+git remote add origin https://github.com/Waterlabsadmin/ECW-Suppressing-Errors.git
+
+git push -u origin master
+
+git remote add origin https://github.com/Waterlabsadmin/ECW-Suppressing-Errors-.git
+
+git clone -b wip-code-refactor --single-branch https://github.com/Waterlabsadmin/LasitbotXifinEvAvaility.git
+
+-----------------------------------------------------------------------
+maven project referece
+
+https://www.youtube.com/watch?v=H35w2V2V-Nk
+-----------------------------------------------------------------
+sonarqube
+
+https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.6.zip
+
+useradd sonar
+passwd sonar
+
+sudo chown -R sonar:sonar packagename
+
+sudo su - sonar
+
+cd /opt/sonarqube/bin
+
+./sonar start
+
+./sonar status
+
+netstat -tulpn
+
+
+--------------------------------------------------
+
+sudo adduser sonarqube
+
+sudo chown -R sonarqube sonarqube
+
+su sonarqube
+
+passwd sonarqube
+
+cd sonarqube-2/sonarqube-7.6/bin/linux-x86-64/
+
+./sonar.sh start
+
+./sonar.sh status
+
+http://localhost:9000/
+
+admin / admin
+
+ghpIimeFpROK4AA4:G3KQ7xDgovGdSGXH2q9TnY
+
+Analyze "test-1-suppresingerror": 34a03f5354725cda67c66536546cfc0ed52643e1
+
+
+mvn sonar:sonar \
+  -Dsonar.projectKey=ghpIimeFpROK4AA4:G3KQ7xDgovGdSGXH2q9TnY \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=34a03f5354725cda67c66536546cfc0ed52643e1
+
+sonar-scanner -D c1846228beef28e85a7823cc95d96743c335e3b1 -Dsonar.login=wluser -Dsonar.password=Protocol@123!
+---------------------------------
+sonar.projectKey=java-sonar-runner-simple
+sonar.projectName=Simple Java Project analyzed with the sonarqube Runner
+sonar.projectVersion=1.0
+
+sonar.sources=src
+
+sonar.language=java
+
+sonar.sourceEncoding=UTF-8
+
+-----------------------------------------------------------------------------------------------------
+sonar ref video
+
+https://www.youtube.com/watch?v=31igoWxauEQ
+------------------------------------------------------------------------------------------
+vm-21 detials back-end
+
+Front end path - /waterlabsbackend/Waterlabs
+
+backend core - /waterlabsbackend/WaterlabsCoreBackend
+
+backend lasit - /waterlabsbackend/Table_Extraction
+
+----------------------------------------------------------------------------------------------
+
+cd /waterlabsbackend/Table_Extraction
+
+set -a
+. .env
+set +a
+
+sleep 10s
+
+docker stop Lasitwaterlabscorebackend
+
+sleep 5s
+
+docker rm Lasitwaterlabscorebackend
+
+sleep 10s
+
+docker build . -t lasit --build-arg DB_STRING=${DB_STRING} --build-arg DB_DRIVER=${DB_DRIVER} --build-arg DB_NAME=${DB_NAME} --build-arg DB_USERNAME=${DB_USERNAME} --build-arg DB_PASSWORD=${DB_PASSWORD} --build-arg DB_HOST=${DB_HOST} --build-arg DB_PORT=${DB_PORT}
+
+sleep 10s
+
+docker run --net="host" -v /waterlabsbackend/WaterlabsCoreBackend/media/lasit_ocr:/DESTINATION_PATH -v /ocr_models/tessdata:/ocr_models/tessdata -d --name Lasitwaterlabscorebackend lasit:latest &
+
+sleep 10s
+
+docker ps
+
+
+-----------------------------------------------------------------
+source /waterlabsbackend/.venv/bin/activat
+
+cd /waterlabsbackend/WaterlabsCoreBackend
+
+kill -9 `cat /waterlabsbackend/WaterlabsCoreBackend/python-run_pid.txt`
+echo "killed py"
+kill -9 `cat /waterlabsbackend/WaterlabsCoreBackend/celery-run_pid.txt`
+echo "killed celery"
+
+sleep 5s
+
+rm -rf /waterlabsbackend/WaterlabsCoreBackend/python-run_pid.txt
+echo "removed py"
+rm -rf /waterlabsbackend/WaterlabsCoreBackend/celery-run_pid.txt
+echo "removed celery"
+
+sleep 5s
+
+nohup /waterlabsbackend/WaterlabsCoreBackend/python-run.sh run > /waterlabsbackend/WaterlabsCoreBackend/python-run.out 0</dev/null 2>&1 &
+
+
+sleep 10s
+
+nohup /waterlabsbackend/WaterlabsCoreBackend/celery-run.sh run > /waterlabsbackend/WaterlabsCoreBackend/celery-run.out 0</dev/null 2>&1 &
+
+
+echo $! > /waterlabsbackend/WaterlabsCoreBackend/python-run_pid.txt
+
+echo $! > /waterlabsbackend/WaterlabsCoreBackend/celery-run_pid.txt
+
+
+
+
+-------------------------------------------------------------------
+netstat -ltnp | grep -w ':8000'
+
+ps -o s,pid,user,%mem,command ax | sort -b -k3 -r
+
+/opt/java8/jdk1.8.0_271/bin/java -cp /opt/servers/sikuli-EuclidPay/libs/* Euclid.EuclidPayJava.EuclidPay rpothannagari Welcome2020 b428b4f8-66c1-4486-8f68-cbc1c5c1327e 90338560-e837-44db-be5d-fbfaf6adae9b true
+
+/opt/java8/jdk1.8.0_271/bin/java -cp "/opt/servers/sikuli-EuclidPay/libs/*"   Euclid.EuclidPayJava.EuclidPay rpothannagari Welcome2020 b428b4f8-66c1-4486-8f68-cbc1c5c1327e 58c1f6cf-e897-45ae-9817-2a6fd59b2a78 true
+
+Euclid.EuclidPayJava.EuclidPay
+
+EuclidPayJava
+
+screen.click(BASE_DIR + "//euclid//test1.png");
+				sleep(2000);
+				screen.click(BASE_DIR + "//euclid//test1.png");
+				sleep(2000);
+
+
+------------------------------------------------------------------
+sikuli
+
+https://www.youtube.com/watch?v=wdKX3lLaqAY
+
+https://sikulix-2014.readthedocs.io/en/latest/interaction.html
+
+			s.type("-",KeyModifier.SHIFT+KeyModifier.CTRL);
+			sleep(800);
+			s.type("-",KeyModifier.SHIFT+KeyModifier.CTRL);
+			sleep(800);
+			s.type("-",KeyModifier.SHIFT+KeyModifier.CTRL);
+			sleep(800);
+			s.type("-",KeyModifier.SHIFT+KeyModifier.CTRL);
+			sleep(800);
+			s.type("-",KeyModifier.SHIFT+KeyModifier.CTRL);
+
+------------------------------------------------------------
+
+//String checknumber=sheet.getRow(r).getCell(7).getStringCellValue();
+			//String CID = new BigDecimal(s1.getRow(i).getCell(0).getNumericCellValue()).toString();
+
+
+---------------------------------------------------------------------------
+chatbot refference
+
+https://www.youtube.com/watch?v=n7MpWHi8T7Q
+
+english_bot=ChatBot("Chatterbot",storage_adapter="chatterbot.storage.SQLStorageAdapter")
+trainer = ChatterBotCorpusTrainer(english_bot)
+trainer.train("chatterbot.corpus.english")
+trainer.train("data/data.yml")
+
+
+"Enter user name"
+
+"passwd"
+
+-------------------------------------------------------
+API call's
+
+curl -H "Content-Type: application/x-www-form-urlencoded\r\n" -H "Connection: close" -X POST -d '{"request": {"action": "challenge", "user": "waterlabsai", "version": "1.0"}}' -k "http://10.1.210.16:8089" --insecure
+
+
+
+curl -H "Content-Type: application/json;charset=UTF-8" -H "Connection: close" -X POST -d '{"request": {"action": "challenge", "user": "waterlabsai", "version": "1.0"}}' -k "http://10.1.210.16:8089" --insecure
+
+
+http://10.1.210.16:8089/system-settings/httpServer
+
+http://waterlabsai:Sravan21#@10.1.210.16:8089/
+
+http://username:password@<servername>/goform/<param>?cmd=<value>&<parameter>=<value>&..
+
+    https://10.1.210.16:8089/
+
+    waterlabsai
+
+    Sravan21#
+dburl=jdbc:postgresql://10.1.210.13:5432/productiondb
+dbuser=proddb
+dbpass=password
+
+psql -U postgres --file db1.sql
+---------------------------------------------------------------------------
+https://www.youtube.com/watch?v=JbldTUDFTBc&t=88s
+
+
+https://dialogflow.cloud.google.com/#/editAgent/sample-dialogflow-hbgf/
+
+https://console.cloud.google.com/iam-admin/serviceaccounts/details/118189941306681187049;edit=true/keys?project=precise-antenna-325211
+
+
+https://codelabs.developers.google.com/codelabs/dialogflow-flutter#2
+
+-------------------------------------------------------------------------------
+branches :
+[ Avality ]LasitbotXifinEvAvaility  -->  develop
+
+[ Gandex ]LasitbotXifinEvAvaility --> wip-code-refactor
+
+[ Navinate ]LasitBotXifinEvNavinet --> master
+
+[ Euclidpay ]Euclidpay --> test
+
+[ suppressingError ]ECW-SuppressingError --> master
+
+
+https://www.youtube.com/watch?v=5VUjP1wMqoE
+
+----------------------------------------------------------------------
+
+ocrh db detials
+
+'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'waterlabshandwritten',
+        'PASSWORD': 'Protocol@123!',
+        'USER': 'waterlabs',
+        'HOST': '10.1.210.11',
+        'PORT': '5432',
+
+OCRH - MODULE 
+
+virutal env path - source /OCRH/ocrh-virtualenv/.venv/bin/activate
+
+source /OCRH/ocrh-virtualenv/.venv/bin/activate
+
+cd /OCRH/OCRHandwrittenModule
+
+sudo python3 manage.py runserver 0.0.0.0:8001
+
+cd /OCRH/OCRHandwrittenModule
+
+node static_server.js
+
+frontend url - http://localhost:3000/
+
+ 
+
+backend url - http://localhost:8001/
+
+
+sudo kill -9 $(sudo lsof -t -i:8001)
+---------------------------------------------------------------------------
+
+
+ALTER USER sonar WITH ENCRYPTED password 'sonar';
+
+CREATE DATABASE sonarqube OWNER sonar;
+
+GRANT ALL PRIVILEGES ON DATABASE sonarqube to sonar;
+
+
+sudo update-alternatives --config java
+
+export PATH=”$PATH:/opt/sonarqube/bin/linux-x86-64”
+
+------------------------------------------------------------------
+-----------------------------------------------------------------
+mysql username - root
+
+mysql password - admin
+
+sudo apt install mysql-server
+
+mysql --version
+
+sudo mysql_secure_installation
+
+y
+
+1
+
+enter newpassword , re-enter password
+
+Remove anonymous users? y
+
+Disallow root login remotely? y
+
+Remove test database and access to it? y
+
+Reload privilege tables now? y
+
+sudo systemctl status mysql
+
+sudo mysql -u root
+
+SHOW GLOBAL VARIABLES LIKE 'PORT';
+
+port | 3306
+
+127.0.0.1:3306
+
+CREATE DATABASE database_name;
+
+CREATE DATABASE testdb;
+
+
+
+sudo systemctl status mysql
+
+database - waterlabs
+
+username - waterlabs
+
+password - Waterlabs_123
+
+waterlabs
+CREATE DATABASE waterlabs;
+
+CREATE USER 'waterlabs'@'localhost' IDENTIFIED BY 'Waterlabs_123';
+
+GRANT ALL PRIVILEGES ON * . * TO 'waterlabs'@'localhost';
+
+FLUSH PRIVILEGES;
+
+GRANT type_of_permission ON waterlabs.table_name TO 'waterlabs'@'localhost';
+
+SHOW GRANTS FOR 'waterlabs'@'localhost';
+
+-----------------------------------------------------------------
+
+https://github.com/Waterlabsadmin/WaterlabsFrontend.git
+
+
+export PATH="$PATH:/home/achintya_ranjan/Downloads/sonar-scanner-cli-4.4.0.2170-linux/sonar-scanner-4.4.0.2170-linux/bin"
+
+
+--------------------------------------------------------------
+
+sudo docker run -p 8085:8080 --name=jenkins-master-1 --volume /opt/services/jenkins_home/:/var/jenkins_home jenkins-master
+
+------------------------------------------------------
+pg_dump -U username dbname > dbexport.pgsql
+
+pg_dump -U username dbname -N topology -T spatial_ref_sys > dbexport.pgsql
+
+pg_dump -h 127.0.0.1 -U postgres postgres | gzip > postgres_local_$(date +%Y-%m-%d).backup
+
+export PGPASSWORD=Protocal\@123\!; psql -h '127.0.0.1' -U 'postgres' -d 'postgres' -c '> postgres_local_$(date +%Y-%m-%d).backup'
+
+export PGPASSWORD='password'; psql -h 'server name' -U 'user name' -d 'base name' -c 'command'
+
+pg_dump -h 127.0.0.1 --username postgres -w postgres | gzip > postgres_local_$(date +%Y-%m-%d).backup
+
+psql -U username dbname < dbexport.pgsql
+
+
+-----------------------------------------------------------
+
+
+4 verbose stack Error: missing script: code:coverage
+
+netstat -tulpn
+
+npm run-script
+
+Volante PF
+101389437438
+Rajesh@143$
+
+waterlabs-app
+
+----------------------------------------------------------------------------
+
+S no	Instance	Name	OS			Old IP Address	New IP Address
+
+1	VM Instance 1	VM01-R1	Ubuntu Linux (64-bit)	10.1.210.21	10.1.240.21
+
+2	VM Instance 2	VM02-R1	Ubuntu Linux (64-bit)	10.1.210.22	10.1.240.22
+
+3	VM Instance 3	VM03-R1	Ubuntu Linux (64-bit)	10.1.210.23	10.1.240.23
+
+4	VM Instance 4	VM04-R1	Ubuntu Linux (64-bit)	10.1.210.24	10.1.240.24
+
+5	VM Instance 5	VM05-R1	Ubuntu Linux (64-bit)	10.1.210.25	10.1.240.25
+
+6	VM Instance 6	VM06-R1	Ubuntu Linux (64-bit)	10.1.210.27	10.1.240.26
+
+7	VM Instance 7	VM07-R1	Ubuntu Linux (64-bit)	10.1.210.28	10.1.240.27
+
+8	VM Instance 8	VM08-R1	Ubuntu Linux (64-bit)	10.1.210.30	10.1.240.28
+
+9	VM Instance 9	VM09-R1	Ubuntu Linux (64-bit)	10.1.210.33	10.1.240.29
+
+10	VM Instance 10	VM10-R1	Ubuntu Linux (64-bit)	10.1.210.34	10.1.240.30
+
+11	VM Instance 11	VM11-R1	Ubuntu Linux (64-bit) 	10.1.210.35	10.1.240.31
+
+12	VM Instance 12	VM12-R1	Ubuntu Linux (64-bit)	10.1.210.36	10.1.240.32
+
+13	VM Instance 13	VM13-R1	Ubuntu Linux (64-bit)	10.1.210.37	10.1.240.33
+
+14	Staging Server	Staging	Ubuntu Linux (64-bit)	10.1.210.11	10.1.240.12 [ 10.1.240.53]
+
+15	DBServer/  	DB01  	Ubuntu Linux (64-bit)	10.1.210.13	10.1.240.13
+	Production Server
+
+
+--------------------------------------------------------------
+jenkins new url
+
+http://10.1.240.26:8085/
+admin
+83b576162e4d4b439ee2cc4796f49b44
+
+
+sudo docker run -d -p 8085:8080 --name=jenkins-master-1 --volume /opt/services/ssh/:/var/lib/jenkins/.ssh/ --volume /opt/services/jenkins_home/:/var/jenkins_home jenkins-master
+-------------------------------------------------------------------
+http://10.1.240.25:9000/
+
+
+http://10.1.240.53:8000/admin/login/?next=/admin/
+
+ps aux|grep manage.py
+
+
+--------------------------------------------------
+
+----------------------------------------------------
+
+scp /opt/servers/sikuli-xifin-ev-availity/chromedriver vm01@10.1.240.28:/home/vm01
+
+scp jdoe@example.com:/somedir/table /home/me/Desktop/.
+
+scp vm01@10.1.240.29:/home/vm01/sonar.tar.gz /home/administrator/Rajesh/sonarqube-9.1
+
+scp vm01@10.1.240.21:/home/vm01/javacode.tar.gz /home/administrator/Rajesh/sonarqube-9.1
+
+--------------------------------------------------
+
+---------------------------------------------------------------------------
+
+sonar.projectKey=org.sonarqube:sonarqube-scanner
+sonar.projectName=Example of SonarQube Scanner Usage
+sonar.projectVersion=1.0
+
+sonar.sources=src,copybooks
+
+sonar.sourceEncoding=UTF-8
+
+## Cobol Specific Properties
+
+# comma-separated paths to directories with copybooks
+sonar.cobol.copy.directories=copybooks
+# comma-separated list of suffixes
+sonar.cobol.file.suffixes=cbl,cpy
+sonar.cobol.copy.suffixes=cpy
+
+
+
+## Flex Specific Properties
+
+# retrieve code coverage data from the Cobertura report
+sonar.flex.cobertura.reportPath=coverage-report/coverage-cobertua-flex.xml
+
+
+
+# PL/I Specific Properties
+sonar.pli.marginLeft=2
+sonar.pli.marginRight=0
+
+
+----------------------------------------------
+
+//maven2.javacpp.googlecode.com/git/com/googlecode/javacv/javacv/0.1/javacv-0.1-linux-x86.jar
+
+chromedriver  README.md         sonar-project.properties  staticfiles  userapi    waterlabsCore
+manage.py     requirements.txt  static                    templates    waterlabs
+
+export PATH=$PATH:/home/administrator/Rajesh/sonarqube-9.1/sonar-scanner-4.6.2.2472-linux/bin/
+
+
+reboot
+source /etc/profile.d/sonar-scanner.sh
+------------------------------------------------------------------------------
+
+-------------------------------------------------------
+Create a configuration file in your project's root directory called sonar-project.properties
+
+# must be unique in a given SonarQube instance
+sonar.projectKey=Waterlabsbackend-28102021
+
+# --- optional properties ---
+
+# defaults to project key
+sonar.projectName=WaterlabsBackend
+# defaults to 'not provided'
+sonar.projectVersion=1.0
+ 
+# Path is relative to the sonar-project.properties file. Defaults to .
+sonar.sources=.
+ 
+# Encoding of the source code. Default is default system encoding
+sonar.sourceEncoding=UTF-8
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+
+export PATH=$PATH:/opt/sonar-scanner/bin/
+
+
+vi /etc/sysctl.conf
+
+vm.max_map_count=262144
+fs.file-max=65536
+
+sysctl -p
+
+
+vi /etc/security/limits.d/99-sonarqube.conf
+
+root   -   nofile   65536
+root   -   nproc    7610
+
+reboot or source /etc/security/limits.d/99-sonarqube.conf
+
+
+
+
+docker pull sonarqube:latest
+
+docker pull sonarqube:7.7-community
+
+docker images
+
+docker volume create sonarqube-conf 
+docker volume create sonarqube-data
+docker volume create sonarqube-logs
+docker volume create sonarqube-extensions
+
+docker volume inspect sonarqube-conf 
+docker volume inspect sonarqube-data
+docker volume inspect sonarqube-logs
+docker volume inspect sonarqube-extensions
+
+mkdir /sonarqube
+ln -s /var/lib/docker/volumes/sonarqube-conf/_data /sonarqube/conf
+ln -s /var/lib/docker/volumes/sonarqube-data/_data /sonarqube/data
+ln -s /var/lib/docker/volumes/sonarqube-logs/_data /sonarqube/logs
+ln -s /var/lib/docker/volumes/sonarqube-extensions/_data /sonarqube/extensions
+
+docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 -v sonarqube-conf:/opt/sonarqube/conf -v sonarqube-data:/opt/sonarqube/data -v sonarqube-logs:/opt/sonarqube/logs -v sonarqube-extensions:/opt/sonarqube/extensions sonarqube:latest
+
+docker restart sonarqube
+
+docker start sonarqube
+
+docker stop sonarqube
+
+docker logs sonarqube -f
+
+username - admin
+password - Protocol@123!
+
+------------------------------------------------------------------------
+Final sonarqube setup
+----------------------------------------------------------------------
+For Backend:
+
+Waterlabsbackend-28102021: 1e84c720957300d2b498d1ea4d6d492562e0163f
+
+sonar-scanner \
+  -Dsonar.projectKey=Waterlabsbackend \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://10.1.240.23:9000 \
+  -Dsonar.login=1e84c720957300d2b498d1ea4d6d492562e0163f
+
+-------------------------------------------------------------------------
+For FrontEnd:
+
+WaterlabsFront-28102021: f15201e92eacb34f0fa69879070e09efbee7eddd
+
+sonar-scanner \
+  -Dsonar.projectKey=WaterlabsFrontend \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://10.1.240.23:9000 \
+  -Dsonar.login=f15201e92eacb34f0fa69879070e09efbee7eddd
+
+
+-------------------------------------------------------------------------
+EuclidPay:
+
+/EuclidPay-sonar
+
+EuclidPay-28102021: 6c097ef259e24cc5ceec46f92669318fa159df3c
+
+mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=EuclidPay \
+  -Dsonar.host.url=http://10.1.240.23:9000 \
+  -Dsonar.login=6c097ef259e24cc5ceec46f92669318fa159df3c
+
+-----------------------------------------------------------------------------
+EvNavinet:
+
+EvNavinet-28102021: 98d73372ad5901d4d2d5ca2c7d0c7df1f8877ba1
+
+mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=EvNavinet \
+  -Dsonar.host.url=http://10.1.240.23:9000 \
+  -Dsonar.login=98d73372ad5901d4d2d5ca2c7d0c7df1f8877ba1
+
+---------------------------------------------------------------------------
+ECW-Suppressing-Errors
+
+
+ECW-Suppressing-Errors-28102021: f712121a004384de05828633e467808e9639aafd
+
+
+mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=ECW-Suppressing-Errors \
+  -Dsonar.host.url=http://10.1.240.23:9000 \
+  -Dsonar.login=f712121a004384de05828633e467808e9639aafd
+
+---------------------------------------------------------------------
+EvAvaility:
+
+
+EvAvaility-28102021: 6265d4dbe33d0a500fae6c6fc42b1778d1f47e46
+
+mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=EvAvaility \
+  -Dsonar.host.url=http://10.1.240.23:9000 \
+  -Dsonar.login=6265d4dbe33d0a500fae6c6fc42b1778d1f47e46
+
+------------------------------------------------------------------
+ECW-OS-Selfpay:
+
+ECW-OS-Selfpay-28102021: 234583afbadd1e2c86d31f78a730c43e582c82ba
+
+mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=ECW-OS-Selfpay \
+  -Dsonar.host.url=http://10.1.240.23:9000 \
+  -Dsonar.login=234583afbadd1e2c86d31f78a730c43e582c82ba
+
+
+------------------------------------------------------------
+Gandex :
+
+Gandex-28102021: f2beeb70010d9c931b24358542f5a1b86b4918a9
+
+
+mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=Gandex \
+  -Dsonar.host.url=http://10.1.240.23:9000 \
+  -Dsonar.login=f2beeb70010d9c931b24358542f5a1b86b4918a9
+
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+/Frontend-sonar	- master
+
+/EuclidPay-sonarqube 
+
+/LasitbotXifinEvAvaility-sonar
+
+/LasitBotXifinEvNavinet-sonar
+
+/sonar-WaterlabsCoreBackend
+
+/Gandex-sonar
+
+/ECW-OS-Selfpay-sonar
+
+/ECW-Suppressing-Errors-sonar
+
+
+bitegarden-sonarqube-report-2.9.1.jar
+
+https://www.bitegarden.com/thank-you?link=%22https://marketplace.bitegarden.com/download/productArtifact?productName=bitegarden-sonarqube-report&productVersion=2.9.1&productFileExt=jar&customerEmail=rajesh7799053986@gmail.com&customerName=Rajesh&customerSurnames=Arunachalam&customerCompany=vertex%22
+
+Venkateswarlu Arunachalam
+
+arunachalamvenkateswarlu@gmail.com
+Venkateswarlu@123$
+
+
+101389437438
+Rajesh@143$
+
+
+50100252214752
+
+HDFC0004277
+
+
+export JAVA_HOME=/opt/java8/jdk1.8.0_271
+export PATH=$PATH:$JAVA_HOME/bin
+export PATH="$PATH:/home/administrator/snap/flutter/common/flutter/bin"
+export PATH=$PATH:/home/administrator/Rajesh/sonarqube-9.1/sonar-scanner-4.6.2.2472-linux/bin/
+
+
+vi /etc/profile.d/sonar-scanner.sh
+
+#/bin/bash
+export PATH="$PATH:/opt/sonar-scanner/bin"
+
+---------------------------------------------------------
+
+sonarqube 
+
+waterlabs-sonar
+Protocol@123!
+
+---------------------------------------
+
+WaterlabsBackend-Sonar -- master
+WaterlabsFrontend-Sonar -- master
+WaterlabsFrontend-Sonar -- master
+EuclidPay-sonar	-- test
+LasitBotXifinEvNavinet -- master
+LasitbotXifinEvAvaility  -- develop
+ECW-Self-Pay -- master
+ECW-SuppressingErrors -- master
+Gandex  -- wip-code-refactor
+
+
+83b576162e4d4b439ee2cc4796f49b44
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
